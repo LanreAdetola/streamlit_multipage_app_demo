@@ -6,51 +6,42 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import re
 import requests
+import os
 
-#----Page Setup---
-about_page = st.Page(
-    page="views/about_me.py",
-    title="About Me",
-    icon=":material/account_circle:",
-    default=True,
-)
-project_1_page = st.Page(
-    page="views/passing.py",
-    title="Passing Profiles",
-    icon=":material/bar_chart:",
-    
-)
+# Page functions
+def about_page():
+    st.title("About Me")
+    st.write("This is the About Me page.")
 
-project_2_page = st.Page(
-    page="views/shooting.py",
-    title="Shooting Profiles",
-    icon=":material/bar_chart:",
-    
-)
-project_3_page = st.Page(
-    page="views/dna.py",
-    title="Club Profile",
-    icon=":material/bar_chart:",
-    
-)
+def passing_profiles():
+    st.title("Passing Profiles")
+    st.write("This is the Passing Profiles page.")
 
-project_4_page = st.Page(
-    page="views/genk.py",
-    title="2023/24 Genk Player Profiles",
-    icon=":material/bar_chart:",
-    
-)
+def shooting_profiles():
+    st.title("Shooting Profiles")
+    st.write("This is the Shooting Profiles page.")
 
-# --- Navigation -----
-pg = st.navigation( 
-    {
-        "Info": [about_page],
-         "Projects": [project_1_page, project_2_page, project_3_page, project_4_page],
-    }
-         )
+def club_profile():
+    st.title("Club Profile")
+    st.write("This is the Club Profile page.")
+
+def genk_profiles():
+    st.title("2023/24 Genk Player Profiles")
+    st.write("This is the Genk Player Profiles page.")
+
+# Navigation
+pages = {
+    "About Me": about_page,
+    "Passing Profiles": passing_profiles,
+    "Shooting Profiles": shooting_profiles,
+    "Club Profile": club_profile,
+    "2023/24 Genk Player Profiles": genk_profiles
+}
+
+st.sidebar.title("Navigation")
+selection = st.sidebar.radio("Go to", list(pages.keys()))
+
+# Display selected page
+pages[selection]()
 
 st.sidebar.text("Made by Lanre.A")
-
-
-# Run Navigation
-pg.run()
